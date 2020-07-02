@@ -1,23 +1,27 @@
 const express = require('express')
+const config = require('config')
 const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 
-const PORT = +process.env.PORT || 3000;
+const PORT = config.get('port') || 5000;
 const app = express();
+
+app.use('/api/auth', require('./routes/auth.routes'))
 
 async function start() {
     try {
-        await mongoose.connect('', {
+        await mongoose.connect(config.get('mongoUri'), {
             useNewUrlParser: true,
-            useFindAndModify: false
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            // useFindAndModify: false
         })
+        app.listen(PORT, () => console.log(`Server has been started on port ${PORT}...`))
     } catch (e) {
-        console.log(e)
+        console.log('Server error', e.message)
+        process.exit(1)
     }
 }
 
 start()
 
-app.listen(PORT, () => {
-    // console.log(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
-    console.log(`Server has been started...`);
-});
