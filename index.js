@@ -1,7 +1,6 @@
 const express = require('express')
 const config = require('config')
 const mongoose = require('mongoose')
-const exphbs = require('express-handlebars')
 
 const PORT = config.get('port') || 5000;
 const app = express();

@@ -1,4 +1,5 @@
 {
   "port": 5000,
+  "jwtSecret": "alik boss kanban",
   "mongoUri": "mongodb+srv://alik:181212@cluster0-rwsgd.mongodb.net/kanban?retryWrites=true&w=majority"
 }
